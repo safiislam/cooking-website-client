@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import HomeLayout from "../Layout/HomeLayout";
 import Home from "../Pages/Home";
 import Blog from "../Shared/Blog";
+import Datail from "../Layout/Datail";
+import ChefDegail from "../Shared/ChefDegail";
 
 
 
@@ -23,8 +25,16 @@ export const router = createBrowserRouter([
                 element:<Blog />
             }
         ]
-    }
+    },
     {
-        
+        path:'/chef',
+        element: <Datail />,
+        children:[
+            {
+                path:':id',
+                element: <ChefDegail />,
+                loader:({params})=> fetch(`http://localhost:5000/chefInfo/${params.id}`)
+            }
+        ]
     }
 ])

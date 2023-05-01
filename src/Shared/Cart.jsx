@@ -13,7 +13,7 @@ const Cart = ({ chef }) => {
                     <p>Likes:{likes}</p>
                     <p>Number of Recipes: {numberOfRecipes}</p>
                     <div className="card-actions justify-end">
-                        <Link to={`/:${user_id}`}><button className="btn btn-primary">Buy Now</button></Link>
+                        <Link to={`/chef/${user_id}`}><button className="btn btn-primary">Buy Now</button></Link>
                     </div>
                 </div>
             </div>
