@@ -3,12 +3,22 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Navbar = () => {
-    const {user} =useContext(AuthContext)
+    const {user,signout} =useContext(AuthContext)
+    console.log(user)
+    const handelLogout =()=>{
+        signout()
+        .then(()=>{
+
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
     return (
         <div >
             <div className="navbar flex justify-between bg-base-300 px-7">
                 <div className="">
-                    <a className="btn btn-ghost normal-case text-xl">Cook&<span className='text-blue-400'>Meal</span></a>
+                    <Link to='/' className="btn btn-ghost normal-case text-xl">Cook&<span className='text-blue-400'>Meal</span></Link>
                 </div>
                 <div className="form-control">
                     <ul className='md:flex gap-4'>
@@ -42,6 +52,9 @@ const Navbar = () => {
                             <li>
                                 Country : Bangladesh
                             </li>
+                            {
+                                user && <>{user.email}</>
+                            }
                             <li>
                                 <a className="justify-between">
                                     Profile
@@ -50,7 +63,7 @@ const Navbar = () => {
                             </li>
                             <li><a>Settings</a></li>
                             {
-                                user ? <li>LogOut</li> : <li><Link to='/login'>Login</Link></li>
+                                user ? <li onClick={handelLogout}>LogOut</li> : <li><Link to='/login'>Login</Link></li>
                             }
                         </ul>
                     </div>
