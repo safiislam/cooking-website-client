@@ -1,18 +1,20 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Navbar = () => {
-    const {user,signout} =useContext(AuthContext)
+    const { user, signout } = useContext(AuthContext)
     console.log(user)
-    const handelLogout =()=>{
+    // const img = user.photoURL
+    const handelLogout = () => {
         signout()
-        .then(()=>{
+            .then(() => {
 
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     return (
         <div >
@@ -42,30 +44,38 @@ const Navbar = () => {
                 </div>
                 <div className="flex-none gap-2">
 
-                    <div className="dropdown dropdown-end">
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                            </div>
-                        </label>
-                        <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                Country : Bangladesh
-                            </li>
-                            {
-                                user && <>{user.email}</>
-                            }
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            {
-                                user ? <li onClick={handelLogout}>LogOut</li> : <li><Link to='/login'>Login</Link></li>
-                            }
-                        </ul>
+                    <div className='md:flex items-center'>
+                        <p>
+                            Country : Bangladesh
+                        </p>
+                        <div className="dropdown dropdown-end ">
+
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    {
+                                        user ? <img title={user?.displayName} src={`${user?.photoURL}`} /> : <FaUserCircle className='w-full text-4xl' />
+                                    }
+                                    {/* <img src={user.f} alt="" /> */}
+                                </div>
+                            </label>
+                            <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+
+                                {
+                                    user && <>{user?.email}</>
+                                }
+                                <li>
+                                    <Link to='/profile' className="justify-between">
+                                        Profile
+                                        <span className="badge">New</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    {
+                                        user ? <li onClick={handelLogout}>LogOut</li> : <li><Link to='/login'>Login</Link></li>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

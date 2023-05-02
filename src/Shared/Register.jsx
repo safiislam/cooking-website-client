@@ -93,7 +93,7 @@ const Register = () => {
                     </span>
                     <input className='w-[50%] mx-auto cursor-pointer mt-4 rounded py-3 bg-blue-300' type="submit" value="Login" />
                     <p>{error}</p>
-                    <p className='mt-4'>Already Have an Accout... <Link  className=' underline decoration-blue-500 hover:no-underline' to='/register'>Login</Link></p>
+                    <p className='mt-4'>Already Have an Accout... <Link  className=' underline decoration-blue-500 hover:no-underline' to='/login'>Login</Link></p>
 
                 </div>
             </form>

@@ -6,6 +6,7 @@ import Datail from "../Layout/Datail";
 import ChefDegail from "../Shared/ChefDegail";
 import Login from "../Shared/Login";
 import Register from "../Shared/Register";
+import Profile from "../Shared/Profile";
 
 
 
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path:'/register',
                 element:<Register />
+            },
+            {
+                path:'/profile',
+                element:<Profile />
             }
         ]
     },
