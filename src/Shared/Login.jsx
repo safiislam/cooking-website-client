@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
     const [show,setShow] = useState(true)
+    const {login} = useContext(AuthContext)
+    const handelLogin =(e)=>{
+        const form= e.target 
+        const email = form.eamil.value 
+        const password = form.password.value
+        login(email,password)
+        .then((result)=>{
+            const user = result.user
+        })
+        .catch(err =>{
+            console.log(err.message)
+        })
+
+    }
     return (
         <div className='mx-auto px-5 md:px-0 flex justify-center items-center '>
-            <form className="form-control w-full max-w-xs">
+            <form onSubmit={handelLogin} className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text">Enter your Email</span>
                     
