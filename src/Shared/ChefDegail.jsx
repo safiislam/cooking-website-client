@@ -18,6 +18,8 @@ const ChefDegail = () => {
                         <p className='text-xl'>Chef Name: {name}</p>
                         <p className='text-lg' >Experience :{yearsOfExperience} year  </p>
                         <p className='text-lg' >Number of Recipes :{numberOfRecipes}  </p>
+                        <p className='text-lg' >Like :{likes}  </p>
+                        
                         <p>Discription: {discription}</p>
                     </div>
                 </div>
