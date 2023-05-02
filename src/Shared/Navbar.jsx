@@ -18,7 +18,7 @@ const Navbar = () => {
     }
     return (
         <div >
-            <div className="navbar flex justify-between bg-base-300 px-7">
+            <div className="navbar  justify-between bg-base-300 px-7">
                 <div className="">
                     <Link to='/' className="btn btn-ghost normal-case text-xl">Cook&<span className='text-blue-400'>Meal</span></Link>
                 </div>
@@ -53,7 +53,7 @@ const Navbar = () => {
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                     {
-                                        user ? <img title={user?.displayName} src={`${user?.photoURL}`} /> : <FaUserCircle className='w-full text-4xl' />
+                                        user ? user.photoURL ? <img title={user?.displayName} src={`${user?.photoURL}`} /> : <FaUserCircle className='w-full text-4xl' /> : <FaUserCircle className='w-full text-4xl' />
                                     }
                                     {/* <img src={user.f} alt="" /> */}
                                 </div>
