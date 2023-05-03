@@ -21,12 +21,13 @@ const Register = () => {
         signUp(email, password)
             .then(result => {
                 const user = result.user;
+                event.target.reset()
                 if(user){
                     setName({ name, url })
-                        .then(() => { // If the update is successful, log a success message or perform other actions
-                            // Code to execute on success
+                        .then(() => { 
+                            
                         })
-                        .catch((err) => { // If the update fails, log the error message to the console or perform other error handling actions
+                        .catch((err) => { 
                             console.log(err);
                         });
 
@@ -50,8 +51,8 @@ const Register = () => {
             setError('please set 6 disit password')
 
         }
-        else if (!/^[0-9]+$/.test(password)) {
-            setError('Assert a string has at least one numbe')
+        else if (!/.+[0-9].+/.test(password)) {
+            setError(' at least one numbe')
         }
         else if (!/.+[A-Z].+/.test(password)) {
             setError('please Set Capital Letter')
@@ -91,7 +92,7 @@ const Register = () => {
                             show ? <>Show</> : <>Hide</>
                         }
                     </span>
-                    <input className='w-[50%] mx-auto cursor-pointer mt-4 rounded py-3 bg-blue-300' type="submit" value="Login" />
+                    <input className='w-[50%] mx-auto cursor-pointer mt-4 rounded py-3 bg-blue-300' type="submit" value="Register" />
                     <p>{error}</p>
                     <p className='mt-4'>Already Have an Accout... <Link  className=' underline decoration-blue-500 hover:no-underline' to='/login'>Login</Link></p>
 

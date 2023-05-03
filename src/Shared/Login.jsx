@@ -8,40 +8,50 @@ const Login = () => {
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || "/";
     const [show, setShow] = useState(true)
-    const { login,loginGoogle,loginInGitHub } = useContext(AuthContext)
+    const [error, setError] = useState('')
+    const { login, loginGoogle, loginInGitHub } = useContext(AuthContext)
     const handelLogin = (e) => {
+        e.preventDefault()
         const form = e.target
-        const email = form.eamil.value
+        const email = form.email.value
         const password = form.password.value
+        console.log(email,password)
+        setError('')
         login(email, password)
             .then((result) => {
                 const user = result.user
+                e.target.reset()
             })
             .catch(err => {
-                console.log(err.message)
+                console.log(err)
+                if(err){
+                    setError('worng password')
+                }
+
             })
 
 
     }
     const handelLoginWithGoogle = () => {
-        loginGoogle()
-        .then(result=>{
-            const user = result.user
-            navigate(from, { replace: true });
 
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        loginGoogle()
+            .then(result => {
+                const user = result.user
+                navigate(from, { replace: true });
+
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
-    const handelLoginWithGitHub= ()=>{
+    const handelLoginWithGitHub = () => {
         loginInGitHub()
-        .then(result=>{
-            const user= result.user
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+            .then(result => {
+                const user = result.user
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     return (
         <div className='mx-auto px-5 md:px-0 flex justify-center items-center '>
@@ -50,12 +60,12 @@ const Login = () => {
                     <span className="label-text">Enter your Email</span>
 
                 </label>
-                <input type="text" placeholder="Email" className="input input-bordered w-full max-w-xs" required />
+                <input type="email" placeholder="Email" name='email' className="input input-bordered w-full max-w-xs" required />
                 <label className="label">
                     <span className="label-text">Enter Password</span>
 
                 </label>
-                <input type={show ? 'text' : "password"} placeholder="Password" className="input input-bordered w-full max-w-xs" required />
+                <input type={show ? 'text' : "password"} placeholder="Password" name='password' className="input input-bordered w-full max-w-xs" required />
                 <div className='inline' onClick={() => setShow(!show)}>
                     {
                         show ? <>Show</> : <>Hide</>
@@ -68,6 +78,7 @@ const Login = () => {
                     <p onClick={handelLoginWithGoogle} className='border-2 flex w-[50%] gap-3 items-center justify-center cursor-pointer rounded border-blue-600 text-blue-500 hover:text-black hover:border-black'> <FaGoogle className='text-blue-600' /> Google </p>
                     <p onClick={handelLoginWithGitHub} className='border-2 flex w-[50%] gap-3 items-center justify-center cursor-pointer rounded border-black text-blue-500 hover:text-black hover:border-black'> <FaGithub className='text-black' /> GitHub </p>
                 </div>
+                <p className='text-red-400' >{error}</p>
             </form>
         </div>
     );

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useRouteError } from 'react-router-dom';
+import { Link, useRouteError } from 'react-router-dom';
 
 const ErrorPage = () => {
     const error = useRouteError();
-    console.log(error)
+    
     return (
         <div className='bg-black h-screen flex flex-col md:flex-row gap-11 justify-center items-center' >
             <div className='w-[90%] md:w-[40%] ' >
@@ -17,6 +17,7 @@ const ErrorPage = () => {
                         error?.error?.message
                     }
                 </p>
+                <button className='border-2 border-white rounded px-3 py-2'><Link to='/'>Go To Home</Link></button>
             </div>
 
         </div>

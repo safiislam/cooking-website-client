@@ -19,13 +19,13 @@ export const router = createBrowserRouter([
     {
         path: '/',
         element: <HomeLayout />,
-
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/',
                 element: <Home />,
-                errorElement: <ErrorPage />,
-                loader: () => fetch('http://localhost:5000/chefInfo')
+                
+                loader: () => fetch('https://cook-website-server-safiislam.vercel.app/chefInfo')
             },
             {
                 path: '/blog',
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <Profile />
+                element: <PrivetRout><Profile /></PrivetRout>
             }
         ]
     },
@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
                 path: ':id',
                 element: <PrivetRout><ChefDegail /></PrivetRout>,
 
-                loader: ({ params }) => fetch(`http://localhost:5000/chefInfo/${params.id}`)
+                loader: ({ params }) => fetch(`https://cook-website-server-safiislam.vercel.app/chefInfo/${params.id}`)
             }
         ]
     }
