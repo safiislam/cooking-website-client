@@ -7,6 +7,8 @@ import ChefDegail from "../Shared/ChefDegail";
 import Login from "../Shared/Login";
 import Register from "../Shared/Register";
 import Profile from "../Shared/Profile";
+import PrivetRout from "../PrivetRoute/PrivetRout";
+import ErrorPage from "../Shared/ErrorPage";
 
 
 
@@ -15,40 +17,45 @@ import Profile from "../Shared/Profile";
 
 export const router = createBrowserRouter([
     {
-        path:'/',
-        element:<HomeLayout />,
-        children:[
+        path: '/',
+        element: <HomeLayout />,
+
+        children: [
             {
-                path:'/',
+                path: '/',
                 element: <Home />,
-                loader: ()=> fetch('http://localhost:5000/chefInfo')
+                errorElement: <ErrorPage />,
+                loader: () => fetch('http://localhost:5000/chefInfo')
             },
             {
-                path:'/blog',
-                element:<Blog />
+                path: '/blog',
+                element: <Blog />
             },
             {
-                path:'/login',
-                element:<Login />
+                path: '/login',
+                element: <Login />
             },
             {
-                path:'/register',
-                element:<Register />
+                path: '/register',
+                element: <Register />
             },
             {
-                path:'/profile',
-                element:<Profile />
+                path: '/profile',
+                element: <Profile />
             }
         ]
     },
     {
-        path:'/chef',
+        path: '/chef',
         element: <Datail />,
-        children:[
+        errorElement: <ErrorPage />,
+        
+        children: [
             {
-                path:':id',
-                element: <ChefDegail />,
-                loader:({params})=> fetch(`http://localhost:5000/chefInfo/${params.id}`)
+                path: ':id',
+                element: <PrivetRout><ChefDegail /></PrivetRout>,
+
+                loader: ({ params }) => fetch(`http://localhost:5000/chefInfo/${params.id}`)
             }
         ]
     }

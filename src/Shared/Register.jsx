@@ -50,7 +50,7 @@ const Register = () => {
             setError('please set 6 disit password')
 
         }
-        else if (!/.+[0-9].+/.test(password)) {
+        else if (!/^[0-9]+$/.test(password)) {
             setError('Assert a string has at least one numbe')
         }
         else if (!/.+[A-Z].+/.test(password)) {
@@ -74,7 +74,7 @@ const Register = () => {
                         <span className="label-text">Enter your Email</span>
 
                     </label>
-                    <input type="text" placeholder="Email" name='email' className="input input-bordered w-full max-w-xs" />
+                    <input type="email" placeholder="Email" name='email' className="input input-bordered w-full max-w-xs" required />
                     <label className="label">
                         <span className="label-text">Enter your Photo Url </span>
 

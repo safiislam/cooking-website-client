@@ -7,35 +7,45 @@ const gitProvider = new GithubAuthProvider();
 const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loader,setLoader] = useState(true)
 
     const signUp = (email, password) => {
+        setLoader(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const signout = () => {
+        setLoader(true)
         return signOut(auth)
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
+            setLoader(false)
         })
         return () => {
             unsubscribe()
+            
         }
     }, [])
     const setName = ({name, url}) => {
         return (updateProfile(auth.currentUser, {
             displayName: name, photoURL:url}))
+            
 
     }
     const login = (email,password) =>{
+        setLoader(true)
         return signInWithEmailAndPassword(auth,email,password)
+        
     }
     const loginGoogle = () =>{
+        
         return signInWithPopup(auth,googleProvider)
     }
     const loginInGitHub =()=>{
+        setLoader(true)
         return signInWithPopup(auth,gitProvider)
     }
     const authInfo = {
@@ -45,7 +55,8 @@ const AuthProvider = ({ children }) => {
         signout,
         login,
         loginGoogle,
-        loginInGitHub
+        loginInGitHub,
+        loader
     }
     return (
         <AuthContext.Provider value={authInfo}>
